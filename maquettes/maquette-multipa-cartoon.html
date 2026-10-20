@@ -208,8 +208,8 @@ const svg=document.getElementById("svg");
 const style=E("style",null,svg);style.textContent=`.k{stroke:${C.pen};stroke-width:4.5;stroke-linejoin:round;stroke-linecap:round}.k3{stroke-width:3.2}.k2{stroke-width:2.2}`;
 const defs=E("defs",null,svg);
 const filt=E("filter",{id:"boil",x:"-3%",y:"-3%",width:"106%",height:"106%"},defs);
-const turb=E("feTurbulence",{type:"fractalNoise",baseFrequency:"0.022",numOctaves:"2",seed:"1",result:"n"},filt);
-E("feDisplacementMap",{in:"SourceGraphic",in2:"n",scale:"2.4",xChannelSelector:"R",yChannelSelector:"G"},filt);
+E("feTurbulence",{type:"fractalNoise",baseFrequency:"0.022",numOctaves:"2",seed:"1",result:"n"},filt);
+E("feDisplacementMap",{in:"SourceGraphic",in2:"n",scale:"1.2",xChannelSelector:"R",yChannelSelector:"G"},filt);
 const irisClip=E("clipPath",{id:"iris"},defs);const irisC=E("circle",{cx:500,cy:375,r:1300},irisClip);
 E("rect",{x:0,y:0,width:1000,height:750,rx:30},E("clipPath",{id:"panel"},defs));
 E("rect",{x:-50,y:-50,width:1100,height:523},E("clipPath",{id:"above"},defs));
@@ -453,7 +453,7 @@ station(g=>{
       const cl=ph(l2,tc,.6);vis(clics[p],cl>0&&cl<1);tf(clics[p],420+p*40,240-cl*25,(p-2)*6,back(clamp(cl*3)));op(clics[p],1-clamp((cl-.6)/.4));});
     txt(hubSub,`${nOn} PA connectée${nOn>1?"s":""} sur 5 · 12 dossiers clients`);
     // le personnage : débordé, puis soulagé
-    if(l2<0){const pan=ph(l1,2.2,1);ch.setExpr(pan>0?"panic":"worried");const sh=Math.sin(l1*42)*3*pan;
+    if(l2<0){const pan=ph(l1,2.2,1);ch.setExpr(pan>0?"panic":"worried");const sh=Math.sin(l1*42)*1.5*pan;
       ch.pose(500+sh,560,1,sh*.5,1,1,pan?150+Math.sin(l1*9)*22:-16,pan?-150-Math.sin(l1*9+1)*22:16,Math.sin(l1*5)*5*pan);
       vis(ch.swirl,pan>0);tf(ch.swirl,0,-300,l1*400,.9);
       ch.drops.forEach((dr,j)=>{vis(dr,pan>0);const p=(l1*1.6+j/3)%1,a=-2.3+j*.8;tf(dr,Math.cos(a)*(60+p*60),-200+Math.sin(a)*(60+p*60)+p*p*40,a*30,1);op(dr,1-p);});
@@ -695,7 +695,7 @@ function render(T){
   let r=1300;
   if(!reduce){if(c.opens&&lt<IRIS_IN)r=Math.min(r,1300*eio(lt/IRIS_IN));if(c.closes&&lt>c.dur-IRIS_OUT)r=Math.min(r,1300*(1-eio((lt-(c.dur-IRIS_OUT))/IRIS_OUT)));}
   att(irisC,"r",Math.max(0,r).toFixed(1));att(irisC,"cx",String(c.iris[0]));att(irisC,"cy",String(c.iris[1]));
-  if(!reduce)att(turb,"seed",String(1+Math.floor(T*10)%7));
+  /* Trait fait main mais fixe : le seed ne change plus (les pixels ne vibrent pas). */
   return {k:c.i,closing:!reduce&&c.closes&&lt>c.dur-IRIS_OUT};
 }
 
