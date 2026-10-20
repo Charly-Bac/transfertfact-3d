@@ -28,7 +28,7 @@ export function Studio() {
     <>
       <color attach="background" args={[BACKDROP]} />
       <fogExp2 attach="fog" args={[BACKDROP, 0.0075]} />
-      <Environment files={HDRI_URL} environmentIntensity={0.55} environmentRotation={[0, Math.PI * 0.75, 0]} />
+      <Environment files={HDRI_URL} environmentIntensity={0.7} environmentRotation={[0, Math.PI * 0.75, 0]} />
       <primitive object={target.current} />
       <directionalLight
         ref={key}
@@ -43,6 +43,8 @@ export function Studio() {
       >
         <orthographicCamera attach="shadow-camera" args={[-10, 10, 9, -9, 1, 50]} />
       </directionalLight>
+      {/* Réflecteur doux face au sujet (panneau blanc de studio) : seule sa direction compte, valable pour toutes les stations. */}
+      <directionalLight color="#fff7ee" intensity={1.0} position={[4, 9, 14]} />
       <hemisphereLight args={["#ffffff", "#b89a76", 0.15]} />
     </>
   );

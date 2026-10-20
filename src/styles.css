@@ -62,7 +62,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offs
 .btn.primary:hover{background:var(--green-d);border-color:var(--green-d)}
 
 .labels{position:absolute;inset:0;pointer-events:none;z-index:3}
-.lbl{position:absolute;left:0;top:0;font:500 12.5px var(--f-body);white-space:nowrap;padding:6px 12px 6px 9px;border-radius:999px;background:#fff;color:var(--ink);
+.lbl{position:relative;font:500 12.5px var(--f-body);white-space:nowrap;padding:6px 12px 6px 9px;border-radius:999px;background:#fff;color:var(--ink);
   display:flex;gap:8px;align-items:center;opacity:0;transition:opacity .45s;box-shadow:0 4px 14px rgba(3,43,42,.12),0 0 0 1px var(--line)}
 .lbl::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c,var(--green))}
 .lbl.on{opacity:1}

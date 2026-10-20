@@ -34,7 +34,8 @@ export function CameraRig() {
           const offY = Math.max(0, Math.min(H * 0.6, sr.bottom - cr.top + 8));
           camera.aspect = W / (H + offY);
           camera.setViewOffset(W, H + offY, 0, offY, W, H);
-          visibleAspect = W / Math.max(1, H - offY);
+          // Largeur visible rapportée à la hauteur du cadre complet (qui fixe l'angle vertical).
+          visibleAspect = W / (H + offY);
         } else {
           const offX = Math.min(W * 0.42, cr.right - sr.left + 30);
           camera.aspect = (W + offX) / H;
@@ -47,8 +48,9 @@ export function CameraRig() {
         visibleAspect = W / H;
       }
       camera.updateProjectionMatrix();
-      // Recul supplémentaire quand la zone visible est étroite (portrait, petites fenêtres).
-      fitK.current = Math.max(1, 1.2 / Math.max(0.35, visibleAspect));
+      // Recul supplémentaire quand la zone visible est étroite (portrait, petites fenêtres),
+      // pour garder à peu près la même largeur de scène que sur ordinateur.
+      fitK.current = Math.min(3.2, Math.max(1, 1.2 / Math.max(0.3, visibleAspect)));
     };
     apply();
     const unsub = film.subscribe(() => requestAnimationFrame(apply));

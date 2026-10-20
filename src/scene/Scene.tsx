@@ -11,6 +11,7 @@ import { CameraRig } from "./CameraRig";
 import { Desk } from "./Desk";
 import { Effects } from "./Effects";
 import { MAX_DPR, quality, useQualityLevel } from "./quality";
+import { Stations } from "./Stations";
 import { Studio } from "./Studio";
 
 function FilmInvalidator() {
@@ -40,7 +41,7 @@ export function Scene({ onReady }: { onReady: () => void }) {
       <Suspense fallback={null}>
         <Studio />
         <Desk />
-        {showAssetBoard && <AssetBoard />}
+        {showAssetBoard ? <AssetBoard /> : <Stations />}
         <Effects />
         <Ready onReady={onReady} />
       </Suspense>

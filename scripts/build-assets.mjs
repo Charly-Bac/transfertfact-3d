@@ -66,7 +66,8 @@ for (const m of POLYHAVEN_MODELS) {
   const out = join(OUT, "models", `${m.id}.glb`);
   const gt = ["gltf-transform"];
   // Simplification géométrique (objets de décor vus de loin) puis textures ramenées à 512 px.
-  run("npx", [...gt, "optimize", join(SRC, "models", m.id, `${m.id}.gltf`), a, "--compress", "false", "--texture-compress", "false", "--simplify-ratio", String(m.simplify ?? 0.75), "--simplify-error", "0.0005"]);
+  run("npx", [...gt, "optimize", join(SRC, "models", m.id, `${m.id}.gltf`), a, "--compress", "false", "--texture-compress", "false", "--simplify-ratio", String(m.simplify ?? 0.75), "--simplify-error", "0.0005",
+    ...(m.keepNodes ? ["--join", "false", "--flatten", "false", "--instance", "false"] : [])]);
   run("npx", [...gt, "resize", a, a, "--width", "512", "--height", "512"]);
   run("npx", [...gt, "etc1s", a, b, "--quality", "160"]);
   run("npx", [...gt, "meshopt", b, out]);

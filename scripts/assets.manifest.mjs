@@ -16,10 +16,10 @@ export const AMBIENTCG_TEXTURES = [
   { id: "Paper006", res: "1K" },
 ];
 
-/** Modèles Poly Haven (glTF). `simplify` : part de triangles conservée. */
+/** Modèles Poly Haven (glTF). `simplify` : part de triangles conservée ; `keepNodes` : objets séparés (on en pioche un seul). */
 export const POLYHAVEN_MODELS = [
   { id: "potted_plant_04", res: "1k" },
   { id: "potted_plant_02", res: "1k", simplify: 0.25 },
-  { id: "stationery_supplies", res: "1k" },
-  { id: "office_notepads", res: "1k" },
+  { id: "stationery_supplies", res: "1k", keepNodes: true },
+  { id: "office_notepads", res: "1k", keepNodes: true },
 ];
