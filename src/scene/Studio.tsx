@@ -10,7 +10,7 @@ import { focusTarget } from "./CameraRig";
 const BACKDROP = new Color("#e6dfd5");
 /** Lumière principale : arrière-gauche, haute, légèrement chaude. */
 const KEY_OFFSET: [number, number, number] = [-8, 14, -7];
-const HDRI_URL = `${import.meta.env.BASE_URL}hdri/photo_studio_loft_hall_1k.hdr`;
+const HDRI_URL = `${import.meta.env.BASE_URL}hdri/photo_studio_loft_hall_1k.jpg`;
 
 export function Studio() {
   const key = useRef<DirectionalLight>(null);
