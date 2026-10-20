@@ -3,7 +3,7 @@
 
 import { useMemo } from "react";
 import type { ThreeElements } from "@react-three/fiber";
-import { BackSide, Color, DoubleSide, FrontSide, MeshStandardMaterial, PlaneGeometry, Vector2, type Texture } from "three";
+import { BackSide, BufferGeometry, Color, DoubleSide, FrontSide, MeshStandardMaterial, PlaneGeometry, Vector2, type Texture } from "three";
 import { useTiledTextures } from "../assets";
 import { CS, FB, FT, grain, paintTexture, roundRect } from "../paint";
 
@@ -12,20 +12,22 @@ export const A4: [number, number] = [2.1, 2.97];
 /** Écart vertical entre deux feuilles empilées. */
 export const SHEET_GAP = 0.012;
 
-/** Légère courbure (bords relevés), identique pour toutes les feuilles. */
-export const sheetGeometry = (() => {
-  const [w, h] = A4;
+/** Papier posé à plat, bords légèrement relevés (courbure `curl`). */
+export function curvedPaper(w: number, h: number, curl: number) {
   const g = new PlaneGeometry(w, h, 20, 24);
   g.rotateX(-Math.PI / 2);
   const p = g.attributes.position;
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i) / (w / 2);
     const z = p.getZ(i) / (h / 2);
-    p.setY(i, 0.012 * (0.55 * x * x + 0.25 * z * z));
+    p.setY(i, curl * (0.55 * x * x + 0.25 * z * z));
   }
   g.computeVertexNormals();
   return g;
-})();
+}
+
+/** Courbure commune à toutes les feuilles A4. */
+export const sheetGeometry = curvedPaper(A4[0], A4[1], 0.012);
 
 export interface Invoice {
   name: string;
@@ -162,12 +164,12 @@ export function usePaperMaterials(prints: Texture[]) {
   }, [maps, prints]);
 }
 
-/** Une feuille : recto + verso partageant la même géométrie courbe. */
-export function Sheet({ front, back, ...props }: { front: MeshStandardMaterial; back: MeshStandardMaterial } & ThreeElements["group"]) {
+/** Une feuille : recto + verso partageant la même géométrie courbe (A4 par défaut). */
+export function Sheet({ front, back, geometry = sheetGeometry, ...props }: { front: MeshStandardMaterial; back: MeshStandardMaterial; geometry?: BufferGeometry } & ThreeElements["group"]) {
   return (
     <group {...props}>
-      <mesh geometry={sheetGeometry} material={front} castShadow receiveShadow />
-      <mesh geometry={sheetGeometry} material={back} receiveShadow />
+      <mesh geometry={geometry} material={front} castShadow receiveShadow />
+      <mesh geometry={geometry} material={back} receiveShadow />
     </group>
   );
 }

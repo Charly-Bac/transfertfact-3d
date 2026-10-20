@@ -60,7 +60,6 @@ export function AssetBoard() {
   return (
     <group>
       <Model path="models/potted_plant_04.glb" position={[2.6, 0, -1.6]} />
-      <Model path="models/potted_plant_02.glb" position={[5.2, 0, -3.2]} rotation={0.6} />
       <Model path="models/stationery_supplies.glb" position={[-0.4, 0.42, 1.8]} rotation={-0.3} lieFlat />
       <Model path="models/office_notepads.glb" position={[0.6, 0, -2.2]} rotation={0.2} />
       <Sheet position={[-0.6, 0.004, -0.4]} rotation={0.08} />

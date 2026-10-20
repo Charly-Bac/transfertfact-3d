@@ -10,7 +10,6 @@ Liste reproductible : `scripts/assets.manifest.mjs` → `node scripts/fetch-asse
 | Texture « Paper 001 » (papier des factures) | `public/textures/paper/*.ktx2` | ambientCG | [ambientCG](https://ambientcg.com/view?id=Paper001) | CC0 |
 | Texture « Paper 006 » (carton des dossiers) | `public/textures/card/*.ktx2` | ambientCG | [ambientCG](https://ambientcg.com/view?id=Paper006) | CC0 |
 | Modèle « Potted Plant 04 » (succulente) | `public/models/potted_plant_04.glb` | James Ray Cock | [Poly Haven](https://polyhaven.com/a/potted_plant_04) | CC0 |
-| Modèle « Potted Plant 02 » | `public/models/potted_plant_02.glb` | Rico Cilliers | [Poly Haven](https://polyhaven.com/a/potted_plant_02) | CC0 |
 | Modèle « Stationery Supplies » (stylos, crayons) | `public/models/stationery_supplies.glb` | Mateusz Sadek | [Poly Haven](https://polyhaven.com/a/stationery_supplies) | CC0 |
 | Modèle « Office Notepads » (blocs-notes) | `public/models/office_notepads.glb` | Ulan Cabanilla | [Poly Haven](https://polyhaven.com/a/office_notepads) | CC0 |
 

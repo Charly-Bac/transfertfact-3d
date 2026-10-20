@@ -6,6 +6,9 @@ import { useRef, type CSSProperties, type RefObject } from "react";
 import { CH, isTraveling } from "../film/chapters";
 import { film } from "../film/clock";
 
+/** Étiquettes déjà placées pendant l'image en cours (pour éviter qu'elles se recouvrent). */
+const placed = { frame: -1, rects: [] as DOMRect[] };
+
 /** Conteneur des étiquettes (div#labels), au-dessus du canvas et sous le texte. */
 export const labelsRoot: RefObject<HTMLElement | null> = { current: null };
 
@@ -22,7 +25,8 @@ interface Props {
 export function Label({ chapter, position, text, color, big, delay = 0.8 }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const shift = useRef(0);
-  useFrame(() => {
+  const drop = useRef(0);
+  useFrame(({ gl }) => {
     const node = el.current;
     if (!node) return;
     const lt = film.T - CH[chapter].start;
@@ -35,9 +39,24 @@ export function Label({ chapter, position, text, color, big, delay = 0.8 }: Prop
     const right = r.right - shift.current;
     const margin = 12;
     const next = right > innerWidth - margin ? innerWidth - margin - right : left < margin ? margin - left : 0;
-    if (next !== shift.current) {
+    // Si une étiquette déjà placée occupe la place, on descend juste en dessous.
+    const frame = gl.info.render.frame;
+    if (placed.frame !== frame) {
+      placed.frame = frame;
+      placed.rects = [];
+    }
+    const top = r.top - drop.current;
+    let down = 0;
+    for (const o of placed.rects) {
+      const overlapX = left + next < o.right && right + next > o.left;
+      const overlapY = top + down < o.bottom && top + down + r.height > o.top;
+      if (overlapX && overlapY) down = o.bottom + 6 - top;
+    }
+    placed.rects.push(new DOMRect(left + next, top + down, r.width, r.height));
+    if (next !== shift.current || down !== drop.current) {
       shift.current = next;
-      node.style.translate = `${next}px 0`;
+      drop.current = down;
+      node.style.translate = `${next}px ${down}px`;
     }
   });
   if (!labelsRoot.current) labelsRoot.current = document.getElementById("labels");

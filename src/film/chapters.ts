@@ -77,7 +77,7 @@ const CHAPTERS: Chapter[] = [
       "Factures hors circuit FE récupérées aussi",
       "Récupération 100 % automatisée et sécurisée",
     ],
-    cam: { a: [1.5, 10.5, 11.5], b: [0.6, 8.6, 9.8], la: [0, 0.3, -0.4], lb: [0, 0.3, -0.3] },
+    cam: { a: [1.5, 10.5, 11.5], b: [0.8, 9.0, 10.6], la: [0, 0.3, -0.4], lb: [0.3, 0.3, 0.4] },
     sameStation: true,
   },
   {
@@ -90,7 +90,7 @@ const CHAPTERS: Chapter[] = [
       "Classées par dossier client",
       "Sans perte d’informations",
     ],
-    cam: { a: [1.8, 9.4, 10.4], b: [1.5, 7.6, 8.4], la: [1.3, 0, -0.3], lb: [1.3, 0, -0.2] },
+    cam: { a: [3.4, 12.2, 12.8], b: [3.0, 10.6, 11.2], la: [2.6, 0, -0.9], lb: [2.6, 0, -0.8] },
   },
   {
     key: "Application mobile",
@@ -114,7 +114,7 @@ const CHAPTERS: Chapter[] = [
       "Compatible avec tous les logiciels comptables",
       "Pièce rattachée à son écriture",
     ],
-    cam: { a: [0.6, 9, 9], b: [0.3, 7.3, 7.2], la: [-0.2, 0, -0.2], lb: [-0.2, 0, -0.1] },
+    cam: { a: [1.0, 9.6, 9.6], b: [0.7, 7.9, 7.8], la: [0.3, 0, -0.2], lb: [0.3, 0, -0.1] },
   },
   {
     key: "Sérénité",
