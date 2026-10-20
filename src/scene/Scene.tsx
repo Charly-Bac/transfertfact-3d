@@ -6,6 +6,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Suspense, useEffect } from "react";
 import { PCFSoftShadowMap } from "three";
 import { film } from "../film/clock";
+import { AssetBoard, showAssetBoard } from "./AssetBoard";
 import { CameraRig } from "./CameraRig";
 import { Desk } from "./Desk";
 import { Effects } from "./Effects";
@@ -39,6 +40,7 @@ export function Scene({ onReady }: { onReady: () => void }) {
       <Suspense fallback={null}>
         <Studio />
         <Desk />
+        {showAssetBoard && <AssetBoard />}
         <Effects />
         <Ready onReady={onReady} />
       </Suspense>
